@@ -1,6 +1,9 @@
 package by.yakovtsev.webapp.storage;
 
 
+import by.yakovtsev.webapp.WebAppException;
+import by.yakovtsev.webapp.model.Resume;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;

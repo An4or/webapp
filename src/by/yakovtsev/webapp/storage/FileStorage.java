@@ -2,6 +2,7 @@ package by.yakovtsev.webapp.storage;
 
 
 
+import by.yakovtsev.webapp.WebAppException;
 import by.yakovtsev.webapp.model.Resume;
 
 import java.io.*;
@@ -42,10 +43,10 @@ public abstract class FileStorage extends AbstractStorage<File> {
     protected void doSave(File file, Resume r) {
         try {
             if(!file.createNewFile()){
-                //throw new WebAppException("Couldn't create file " + file.getAbsolutePath(), r);
+                throw new WebAppException("Couldn't create file " + file.getAbsolutePath(), r);
             }
         } catch (IOException e) {
-            //throw new WebAppException("Couldn't create file " + file.getAbsolutePath(), r, e);
+            throw new WebAppException("Couldn't create file " + file.getAbsolutePath(), r, e);
         }
         write(file, r);
     }
@@ -54,7 +55,7 @@ public abstract class FileStorage extends AbstractStorage<File> {
         try {
             write(new FileOutputStream(file), r);
         } catch (IOException e) {
-            //throw new WebAppException("Couldn't write file " + file.getAbsolutePath(), r, e);
+            throw new WebAppException("Couldn't write file " + file.getAbsolutePath(), r, e);
         }
     }
 
@@ -62,7 +63,7 @@ public abstract class FileStorage extends AbstractStorage<File> {
         try {
             return read(new FileInputStream(file));
         } catch (IOException e) {
-            //throw new WebAppException("Couldn't read file " + file.getAbsolutePath(), e);
+            throw new WebAppException("Couldn't read file " + file.getAbsolutePath(), e);
         }
     }
 
@@ -82,10 +83,8 @@ public abstract class FileStorage extends AbstractStorage<File> {
 
     @Override
     protected void doDelete(File file) {
-        if (!file.delete()) {
-            //throw new WebAppException("File " + file.getAbsolutePath() + " can not be deleted");
-        }
-        }
+        if (!file.delete()) throw new WebAppException("File " + file.getAbsolutePath() + " can not be deleted");
+    }
 
     @Override
     protected List<Resume> doGetAll() {
@@ -99,9 +98,7 @@ public abstract class FileStorage extends AbstractStorage<File> {
     @Override
     public int size() {
         String[] list = dir.list();
-        if (list == null) {
-            //throw new WebAppException("Couldn't read directory " + dir.getAbsolutePath());
-        }
+        if (list == null) throw new WebAppException("Couldn't read directory " + dir.getAbsolutePath());
         return list.length;
     }
 }
