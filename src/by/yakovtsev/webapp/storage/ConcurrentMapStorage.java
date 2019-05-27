@@ -6,10 +6,6 @@ import by.yakovtsev.webapp.model.Resume;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * GKislin
- * 09.01.2015.
- */
 
 public class ConcurrentMapStorage extends AbstractStorage<String> {
 

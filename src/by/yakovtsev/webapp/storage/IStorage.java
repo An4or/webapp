@@ -1,5 +1,6 @@
 package by.yakovtsev.webapp.storage;
 
+import by.yakovtsev.webapp.WebAppException;
 import by.yakovtsev.webapp.model.Resume;
 
 import java.util.Collection;
@@ -8,7 +9,7 @@ import java.util.Collection;
 public interface IStorage {
     void clear();
 
-    void save(Resume r) throws Exception; //add WebAppException
+    void save(Resume r) throws WebAppException;
 
     void update(Resume r);
 
