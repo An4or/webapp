@@ -1,20 +1,26 @@
 package by.yakovtsev.webapp.model;
 
 
+import by.yakovtsev.webapp.web.SectionHtmlType;
+
 public enum SectionType {
-    OBJECTIVE("Позиция"),
-    ACHIEVEMENT("Достижения"),
-    QUALIFICATIONS("Квалификация"),
-    EXPERIENCE("Опыт работы"),
-    EDUCATION("Образование");
+    OBJECTIVE("Позиция", SectionHtmlType.TEXT),
+    ACHIEVEMENT("Достижения", SectionHtmlType.MULTI_TEXT),
+    QUALIFICATIONS("Квалификация", SectionHtmlType.MULTI_TEXT),
+    EXPERIENCE("Опыт работы", SectionHtmlType.ORGANIZATION),
+    EDUCATION("Образование", SectionHtmlType.ORGANIZATION);
 
     private String title;
+    private SectionHtmlType htmlType;
 
-
-    SectionType(String title) {
+    SectionType(String title, SectionHtmlType htmlType) {
         this.title = title;
+        this.htmlType = htmlType;
     }
 
+    public SectionHtmlType getHtmlType() {
+        return htmlType;
+    }
 
     public String getTitle() {
         return title;
